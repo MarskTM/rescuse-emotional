@@ -4,7 +4,7 @@ package main
 // @version 1.0
 // @description API lists for E-Rescues
 
-// @host rescuse-emotional.up.railway.app/
+// @host rescuse-emotional.up.railway.app
 // @BasePath /api/v1
 
 // @securityDefinitions.apikey ApiKeyAuth
