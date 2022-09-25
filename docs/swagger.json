@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "rescuse.up.railway.app",
+    "host": "rescuse-emotional.up.railway.app/",
     "basePath": "/api/v1",
     "paths": {
         "/judge/advice": {

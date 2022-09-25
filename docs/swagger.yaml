@@ -120,7 +120,7 @@ definitions:
       username:
         type: string
     type: object
-host: rescuse.up.railway.app
+host: rescuse-emotional.up.railway.app/
 info:
   contact: {}
   description: API lists for E-Rescues
