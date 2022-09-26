@@ -1,5 +1,20 @@
 basePath: /api/v1
 definitions:
+  model.Answer:
+    properties:
+      answer:
+        type: string
+      id:
+        type: integer
+      question_id:
+        type: integer
+      score_anxiety:
+        type: integer
+      score_depess:
+        type: integer
+      score_stress:
+        type: integer
+    type: object
   model.Judge:
     properties:
       advice_anxiety:
@@ -82,11 +97,11 @@ definitions:
         type: integer
       question_group:
         type: integer
-      score_anxiety:
+      sum_score_anxiety:
         type: integer
-      score_depess:
+      sum_score_depess:
         type: integer
-      score_stress:
+      sum_score_stress:
         description: Điểm số của bài test
         type: integer
     type: object
@@ -127,6 +142,140 @@ info:
   title: Swagger UI for E-Rescues
   version: "1.0"
 paths:
+  /amswer/filter/{question_id}:
+    get:
+      consumes:
+      - application/json
+      description: 'input: amswer''s group_id => output: group amswers'
+      parameters:
+      - description: group_id
+        in: path
+        name: question_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: filter amswer by group_id
+      tags:
+      - amswer-manager-apis
+  /answer/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 'input: answer''s id => output: struct answer'
+      parameters:
+      - description: answer's id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get answer by id
+      tags:
+      - answer-manager-apis
+  /answer/all:
+    get:
+      consumes:
+      - application/json
+      description: 'output: struct answers'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get answers
+      tags:
+      - answer-manager-apis
+  /answer/create:
+    post:
+      consumes:
+      - application/json
+      description: 'input: answer model.Answer => output: status'
+      parameters:
+      - description: fill answer
+        in: body
+        name: answer
+        required: true
+        schema:
+          $ref: '#/definitions/model.Answer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Create answers
+      tags:
+      - answer-manager-apis
+  /answer/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 'input: answer''s id => output: status'
+      parameters:
+      - description: answer's id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete answer by id
+      tags:
+      - answer-manager-apis
+  /answer/update:
+    put:
+      consumes:
+      - application/json
+      description: 'input: answer model.Answer => output: status'
+      parameters:
+      - description: change answer
+        in: body
+        name: answer
+        required: true
+        schema:
+          $ref: '#/definitions/model.Answer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update answer's
+      tags:
+      - answer-manager-apis
   /judge/{id}:
     get:
       consumes:

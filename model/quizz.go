@@ -10,9 +10,9 @@ type Quizz struct {
 	QuestionGroup int `json:"question_group"`
 
 	// Điểm số của bài test
-	ScoreStress  int `json:"score_stress"`
-	ScoreDepress  int `json:"score_depess"`
-	ScoreAnxiety int `json:"score_anxiety"`
+	SumScoreStress  int `json:"sum_score_stress"`
+	SumScoreDepress  int `json:"sum_score_depess"`
+	SumScoreAnxiety int `json:"sum_score_anxiety"`
 
 	CreatedAt time.Time  `swaggerignore:"true"`
 	UpdatedAt time.Time  `swaggerignore:"true"`

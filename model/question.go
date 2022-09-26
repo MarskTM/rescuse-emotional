@@ -7,7 +7,6 @@ import (
 type Question struct {
 	Id            int    `json:"id" gorm:"primaryKey"`
 	Question      string `json:"question"`
-
 	QuestionGroup int    `json:"question_group"`
 
 	CreatedAt time.Time  `swaggerignore:"true"`

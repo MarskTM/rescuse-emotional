@@ -16,6 +16,223 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/amswer/filter/{question_id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: amswer's group_id =\u003e output: group amswers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "amswer-manager-apis"
+                ],
+                "summary": "filter amswer by group_id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "group_id",
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/all": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "output: struct answers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "answer-manager-apis"
+                ],
+                "summary": "Get answers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/create": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: answer model.Answer =\u003e output: status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "answer-manager-apis"
+                ],
+                "summary": "Create answers",
+                "parameters": [
+                    {
+                        "description": "fill answer",
+                        "name": "answer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Answer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/delete/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: answer's id =\u003e output: status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "answer-manager-apis"
+                ],
+                "summary": "Delete answer by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "answer's id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/update": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: answer model.Answer =\u003e output: status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "answer-manager-apis"
+                ],
+                "summary": "Update answer's",
+                "parameters": [
+                    {
+                        "description": "change answer",
+                        "name": "answer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Answer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: answer's id =\u003e output: struct answer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "answer-manager-apis"
+                ],
+                "summary": "Get answer by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "answer's id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/judge/advice": {
             "get": {
                 "security": [
@@ -1167,6 +1384,29 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "model.Answer": {
+            "type": "object",
+            "properties": {
+                "answer": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "question_id": {
+                    "type": "integer"
+                },
+                "score_anxiety": {
+                    "type": "integer"
+                },
+                "score_depess": {
+                    "type": "integer"
+                },
+                "score_stress": {
+                    "type": "integer"
+                }
+            }
+        },
         "model.Judge": {
             "type": "object",
             "properties": {
@@ -1291,13 +1531,13 @@ const docTemplate = `{
                 "question_group": {
                     "type": "integer"
                 },
-                "score_anxiety": {
+                "sum_score_anxiety": {
                     "type": "integer"
                 },
-                "score_depess": {
+                "sum_score_depess": {
                     "type": "integer"
                 },
-                "score_stress": {
+                "sum_score_stress": {
                     "description": "Điểm số của bài test",
                     "type": "integer"
                 }

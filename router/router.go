@@ -46,6 +46,7 @@ func Router() http.Handler {
 	questionController := controller.NewQuestionController()
 	quizzController := controller.NewQuizzController()
 	judgeController := controller.NewJudgeController()
+	answerController := controller.NewAnswerController()
 
 	r.Route("/api/v1", func(router chi.Router) {
 		// Public routes
@@ -100,6 +101,15 @@ func Router() http.Handler {
 				subRoute.Post("/create", judgeController.Create)
 				subRoute.Put("/update", judgeController.Update)
 				subRoute.Delete("/delete/{id}", judgeController.Delete)
+			})
+
+			protectedRoute.Route("/answer", func(subRoute chi.Router) {
+				subRoute.Get("/all", answerController.GetAll)
+				subRoute.Get("/{id}", answerController.GetById)
+				subRoute.Post("/create", answerController.Create)
+				subRoute.Put("/update", answerController.Update)
+				subRoute.Delete("/delete/{id}", answerController.Delete)
+				subRoute.Get("/filter/{quetion_id}", answerController.FilterByQuestionId)
 			})
 		})
 	})
