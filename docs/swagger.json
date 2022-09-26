@@ -9,43 +9,6 @@
     "host": "rescuse-emotional.up.railway.app",
     "basePath": "/api/v1",
     "paths": {
-        "/amswer/filter/{question_id}": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "input: amswer's group_id =\u003e output: group amswers",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "amswer-manager-apis"
-                ],
-                "summary": "filter amswer by group_id",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "group_id",
-                        "name": "question_id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/model.Response"
-                        }
-                    }
-                }
-            }
-        },
         "/answer/all": {
             "get": {
                 "security": [
@@ -136,6 +99,43 @@
                         "type": "integer",
                         "description": "answer's id",
                         "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/answer/filter/{question_id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "input: amswer's question_id =\u003e output:  amswers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "amswer-manager-apis"
+                ],
+                "summary": "filter amswer by question_id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "question_id",
+                        "name": "question_id",
                         "in": "path",
                         "required": true
                     }

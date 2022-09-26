@@ -21,7 +21,7 @@ func (r *answerRepository) GetAll() ([]model.Answer, error) {
 	db := infrastructure.GetDB()
 	var answers []model.Answer
 
-	if err := db.Model(&model.Judge{}).Find(&answers).Error; err != nil {
+	if err := db.Model(&model.Answer{}).Find(&answers).Error; err != nil {
 		return nil, err
 	}
 	return answers, nil

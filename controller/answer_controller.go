@@ -228,16 +228,16 @@ func (c *answerController) Delete(w http.ResponseWriter, r *http.Request) {
 	render.JSON(w, r, res)
 }
 
-// Filter amswer by group godoc
+// Filter amswer by questionId godoc
 // @tags amswer-manager-apis
-// @Summary filter amswer by group_id
-// @Description input: amswer's group_id => output: group amswers
+// @Summary filter amswer by question_id
+// @Description input: amswer's question_id => output:  amswers
 // @Accept json
 // @Produce json
-// @Param question_id path integer true "group_id"
+// @Param question_id path integer true "question_id"
 // @Security ApiKeyAuth
 // @Success 200 {object} model.Response
-// @Router /amswer/filter/{question_id} [get]
+// @Router /answer/filter/{question_id} [get]
 func (c *answerController) FilterByQuestionId(w http.ResponseWriter, r *http.Request) {
 	var res *model.Response
 
