@@ -234,7 +234,7 @@ func (c *answerController) Delete(w http.ResponseWriter, r *http.Request) {
 // @Description input: amswer's question group_id => output:  amswers list
 // @Accept json
 // @Produce json
-// @Param group_id path integer true "question_id"
+// @Param group_id path integer true "group_id"
 // @Security ApiKeyAuth
 // @Success 200 {object} model.Response
 // @Router /answer/filter/{group_id} [get]

@@ -62,7 +62,7 @@ func (r *answerRepository) FilterByQuestionGroup(groupId int) ([]model.Answer, e
 	db := infrastructure.GetDB()
 	var answers []model.Answer
 
-	if err := db.Where("question_group = ?", groupId).Find(&answers).Error; err != nil {
+	if err := db.Where("question_group = ?", groupId).Find(&answers).Order("id ASC").Error; err != nil {
 		return nil, err
 	}
 	return answers, nil

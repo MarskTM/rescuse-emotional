@@ -141,7 +141,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "question_id",
+                        "description": "group_id",
                         "name": "group_id",
                         "in": "path",
                         "required": true

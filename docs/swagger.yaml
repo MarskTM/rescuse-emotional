@@ -235,7 +235,7 @@ paths:
       - application/json
       description: 'input: amswer''s question group_id => output:  amswers list'
       parameters:
-      - description: question_id
+      - description: group_id
         in: path
         name: group_id
         required: true
