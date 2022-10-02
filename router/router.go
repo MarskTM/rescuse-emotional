@@ -11,7 +11,7 @@ import (
 	"github.com/go-chi/render"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
-	_"github.com/go-chi/jwtauth"
+	"github.com/go-chi/jwtauth"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
@@ -57,8 +57,8 @@ func Router() http.Handler {
 		router.Put("/profile/upsert", profileController.Upsert)
 		
 		router.Group(func(protectedRoute chi.Router) {
-			// protectedRoute.Use(jwtauth.Verifier(infrastructure.GetEncodeAuth()))
-			// protectedRoute.Use(jwtauth.Authenticator)
+			protectedRoute.Use(jwtauth.Verifier(infrastructure.GetEncodeAuth()))
+			protectedRoute.Use(jwtauth.Authenticator)
 
 			protectedRoute.Route("/user", func(subRoute chi.Router) {
 				subRoute.Get("/all", userController.GetAll)
