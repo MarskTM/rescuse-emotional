@@ -251,7 +251,7 @@ paths:
       - ApiKeyAuth: []
       summary: filter amswer by question_id
       tags:
-      - amswer-manager-apis
+      - Filter-manager-apis
   /answer/update:
     put:
       consumes:
@@ -687,7 +687,7 @@ paths:
       - ApiKeyAuth: []
       summary: filter question by group_id
       tags:
-      - question-manager-apis
+      - Filter-manager-apis
   /question/update:
     put:
       consumes:

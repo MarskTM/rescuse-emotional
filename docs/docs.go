@@ -135,7 +135,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "amswer-manager-apis"
+                    "Filter-manager-apis"
                 ],
                 "summary": "filter amswer by question_id",
                 "parameters": [
@@ -834,7 +834,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "question-manager-apis"
+                    "Filter-manager-apis"
                 ],
                 "summary": "filter question by group_id",
                 "parameters": [

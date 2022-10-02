@@ -229,7 +229,7 @@ func (c *answerController) Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 // Filter amswer by questionId godoc
-// @tags amswer-manager-apis
+// @tags Filter-manager-apis
 // @Summary filter amswer by question_id
 // @Description input: amswer's question group_id => output:  amswers list
 // @Accept json

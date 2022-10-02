@@ -229,7 +229,7 @@ func (c *questionController) Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 // Filter question by group godoc
-// @tags question-manager-apis
+// @tags Filter-manager-apis
 // @Summary filter question by group_id
 // @Description input: question's group_id => output: group questions
 // @Accept json
