@@ -8,7 +8,7 @@ import (
 type JudgeService interface {
 	GetById(id int) (*model.Judge, error)
 	GetAll() ([]model.Judge, error)
-	GetAdvices(stress, depess, anxiety int) (*model.AdvicePayload, error)	// nhập điểm của bài đánh giá
+	GetAdvices(stress, depess, anxiety, groupId int) (*model.AdvicePayload, error)	// nhập điểm của bài đánh giá
 	Create(new *model.Judge) (*model.Judge, error)
 	Update(judge model.Judge) (*model.Judge, error)
 	Delete(id int) error
@@ -36,15 +36,15 @@ func (s *judgeService) GetAll() ([]model.Judge, error) {
 	return judges, nil
 }
 
-func (s *judgeService) GetAdvices(stress, depess, anxiety int) (*model.AdvicePayload, error) {
-	judges, err := s.judgeRepo.GetAll()
+func (s *judgeService) GetAdvices(stress, depess, anxiety, groupId int) (*model.AdvicePayload, error) {
+	judges, err := s.judgeRepo.FilterByGroup(groupId)
 	if err != nil {
 		return nil, err
 	}
 	var adviceStress, adviceDepress, adviceAnxiety string
 
 	// Use for questions group 2 - test depession
-	if stress == 0 && anxiety == 0 {
+	if groupId == 2 {
 		for _, i := range judges {
 			if i.ScoreDepressMin <= depess && depess <= i.ScoreDepressMax {
 				adviceDepress = i.AdviceDepress

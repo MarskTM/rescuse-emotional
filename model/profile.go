@@ -6,6 +6,7 @@ import (
 
 type Profile struct {
 	Id       int       `json:"id" gorm:"primaryKey"`
+	RealName string    `json:"real_name"`
 	Name     string    `json:"name"`
 	Birthday time.Time `json:"birthday"`
 	Gender   string    `json:"gender"`
@@ -13,8 +14,8 @@ type Profile struct {
 	Phone    string    `json:"phone"`
 	Avatar   string    `json:"avatar"`
 	NewUser  string    `json:"newUser"`
-	
-	UserId   int       `json:"userId" gorm:"column:user_id;unique"`
+
+	UserId int `json:"userId" gorm:"column:user_id;unique"`
 
 	CreatedAt time.Time  `swaggerignore:"true"`
 	UpdatedAt time.Time  `swaggerignore:"true"`

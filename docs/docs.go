@@ -240,7 +240,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "input: ScoreStress, ScoreDepress, ScoreAnxiety =\u003e output: struct judge-advice\nWARNING: ALl the score must be greater than 1 and less than 10",
+                "description": "input: ScoreStress, ScoreDepress, ScoreAnxiety, questionGroup =\u003e output: struct judge-advice.  If questionGroup = 2 =\u003e Test PQH-9\nWARNING: ALl the score must be greater than 1 and less than 10",
                 "consumes": [
                     "application/json"
                 ],
@@ -270,6 +270,13 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "score_anxiety",
                         "name": "score_anxiety",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "group_question",
+                        "name": "group_question",
                         "in": "query",
                         "required": true
                     }
@@ -1423,6 +1430,10 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
+                "question_group_id": {
+                    "description": "Bộ câu hỏi tương ứng",
+                    "type": "integer"
+                },
                 "score_anxiety_max": {
                     "type": "integer"
                 },
@@ -1498,6 +1509,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "phone": {
+                    "type": "string"
+                },
+                "real_name": {
                     "type": "string"
                 },
                 "userId": {

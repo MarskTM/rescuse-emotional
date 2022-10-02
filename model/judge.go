@@ -6,6 +6,8 @@ import (
 
 type Judge struct {
 	Id int `json:"id" gorm:"primaryKey"`
+	// Bộ câu hỏi tương ứng
+	QuestionGroup int `json:"question_group_id"`
 
 	// Phạm vi điểm số
 	ScoreStressMax  int `json:"score_stress_max"`
@@ -42,4 +44,5 @@ type JudgeRepository interface {
 	Create(new *Judge) (*Judge, error)
 	Update(judge Judge) (*Judge, error)
 	Delete(id int) error
+	FilterByGroup(groupsId int) ([]Judge, error)
 }

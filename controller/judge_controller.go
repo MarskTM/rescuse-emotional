@@ -101,13 +101,14 @@ func (c *judgeController) GetAll(w http.ResponseWriter, r *http.Request) {
 // Get judge-advice by score godoc
 // @tags judge-manager-apis
 // @Summary Get judge-advice by score
-// @Description input: ScoreStress, ScoreDepress, ScoreAnxiety => output: struct judge-advice  
+// @Description input: ScoreStress, ScoreDepress, ScoreAnxiety, questionGroup => output: struct judge-advice.  If questionGroup = 2 => Test PQH-9
 // @Description WARNING: ALl the score must be greater than 1 and less than 10
 // @Accept json
 // @Produce json
 // @Param score_stress query integer true "score_Stress"
 // @Param score_depress query integer true "score_depress"
 // @Param score_anxiety query integer true "score_anxiety"
+// @Param group_question query integer true "group_question"
 // @Security ApiKeyAuth
 // @Success 200 {object} model.Response
 // @Router /judge/advice [get]
@@ -153,7 +154,20 @@ func (c *judgeController) GetAdvices(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmp, err := c.judgeService.GetAdvices(scoreStress, scoreDepress, scoreAnxiety)
+	groupQuestion, err := strconv.Atoi(r.URL.Query().Get("group_question"))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		http.Error(w, http.StatusText(400), 400)
+		res = &model.Response{
+			Data:    nil,
+			Message: "get group question failed: " + err.Error(),
+			Success: false,
+		}
+		render.JSON(w, r, res)
+		return
+	}
+
+	tmp, err := c.judgeService.GetAdvices(scoreStress, scoreDepress, scoreAnxiety, groupQuestion)
 	if err != nil {
 		res = &model.Response{
 			Data:    nil,

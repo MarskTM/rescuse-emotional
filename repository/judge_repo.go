@@ -59,6 +59,16 @@ func (r *judgeRepository) Delete(id int) (error) {
 	return nil
 }
 
+func (r *judgeRepository) FilterByGroup(groupId int) ([]model.Judge, error) {
+	db := infrastructure.GetDB()
+	var judges []model.Judge
+
+	if err := db.Model(&model.Judge{}).Where("question_group = ?", groupId).Find(&judges).Error; err != nil {
+		return nil, err
+	}
+	return judges, nil
+} 
+
 func NewJudgeRepository() *judgeRepository {
 	return &judgeRepository{}
 }
