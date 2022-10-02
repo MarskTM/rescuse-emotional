@@ -6,7 +6,7 @@ definitions:
         type: string
       id:
         type: integer
-      question_id:
+      question_group:
         type: integer
       score_anxiety:
         type: integer
@@ -229,15 +229,15 @@ paths:
       summary: Delete answer by id
       tags:
       - answer-manager-apis
-  /answer/filter/{question_id}:
+  /answer/filter/{group_id}:
     get:
       consumes:
       - application/json
-      description: 'input: amswer''s question_id => output:  amswers'
+      description: 'input: amswer''s question group_id => output:  amswers list'
       parameters:
       - description: question_id
         in: path
-        name: question_id
+        name: group_id
         required: true
         type: integer
       produces:

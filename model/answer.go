@@ -6,7 +6,7 @@ import (
 
 type Answer struct {
 	Id         int    `json:"id" gorm:"primaryKey"`
-	QuestionId int    `json:"question_id"`
+	QuestionGroup int `json:"question_group"`
 	Answer     string `json:"answer"`
 
 	ScoreStress  int `json:"score_stress"`
@@ -24,5 +24,5 @@ type AnswerRepository interface {
 	Create(new *Answer) (*Answer, error)
 	Update(answer Answer) (*Answer, error)
 	Delete(id int) error
-	FilterByQuestionId(questionId int) ([]Answer, error)
+	FilterByQuestionGroup(groupId int) ([]Answer, error)
 }

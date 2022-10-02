@@ -18,7 +18,7 @@ type AnswerController interface {
 	Create(w http.ResponseWriter, r *http.Request)
 	Update(w http.ResponseWriter, r *http.Request)
 	Delete(w http.ResponseWriter, r *http.Request)
-	FilterByQuestionId(w http.ResponseWriter, r *http.Request)
+	FilterByQuestionGroup(w http.ResponseWriter, r *http.Request)
 }
 
 type answerController struct {
@@ -231,20 +231,20 @@ func (c *answerController) Delete(w http.ResponseWriter, r *http.Request) {
 // Filter amswer by questionId godoc
 // @tags amswer-manager-apis
 // @Summary filter amswer by question_id
-// @Description input: amswer's question_id => output:  amswers
+// @Description input: amswer's question group_id => output:  amswers list
 // @Accept json
 // @Produce json
-// @Param question_id path integer true "question_id"
+// @Param group_id path integer true "question_id"
 // @Security ApiKeyAuth
 // @Success 200 {object} model.Response
-// @Router /answer/filter/{question_id} [get]
-func (c *answerController) FilterByQuestionId(w http.ResponseWriter, r *http.Request) {
+// @Router /answer/filter/{group_id} [get]
+func (c *answerController) FilterByQuestionGroup(w http.ResponseWriter, r *http.Request) {
 	var res *model.Response
 
-	idStr := chi.URLParam(r, "question_id")
-	question_id, err := strconv.Atoi(idStr)
+	idStr := chi.URLParam(r, "group_id")
+	group_id, err := strconv.Atoi(idStr)
 
-	answers, err := c.answerService.FilterByQuestionId(question_id)
+	answers, err := c.answerService.FilterByQuestionGroup(group_id)
 	if err != nil {
 		res = &model.Response{
 			Data:    nil,
@@ -254,7 +254,7 @@ func (c *answerController) FilterByQuestionId(w http.ResponseWriter, r *http.Req
 	} else {
 		res = &model.Response{
 			Data:    answers,
-			Message: "filter question successfully.",
+			Message: "filter group answer successfully.",
 			Success: true,
 		}
 	}

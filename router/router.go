@@ -109,7 +109,7 @@ func Router() http.Handler {
 				subRoute.Post("/create", answerController.Create)
 				subRoute.Put("/update", answerController.Update)
 				subRoute.Delete("/delete/{id}", answerController.Delete)
-				subRoute.Get("/filter/{question_id}", answerController.FilterByQuestionId)
+				subRoute.Get("/filter/{question_id}", answerController.FilterByQuestionGroup)
 			})
 		})
 	})

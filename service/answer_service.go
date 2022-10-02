@@ -11,7 +11,7 @@ type AnswerService interface {
 	Create(newAnswer *model.Answer) (*model.Answer, error)
 	Update(newAnswer model.Answer) (*model.Answer, error)
 	Delete(id int) (error)
-	FilterByQuestionId(questionId int) ([]model.Answer, error)
+	FilterByQuestionGroup(groupId int) ([]model.Answer, error)
 }
 
 type answerService struct {
@@ -59,8 +59,8 @@ func (s *answerService) Delete(id int) error {
 	return nil
 }
 
-func (s *answerService) FilterByQuestionId(questionId int) ([]model.Answer, error) {
-	answers, err := s.answerRepo.FilterByQuestionId(questionId)
+func (s *answerService) FilterByQuestionGroup(groupId int) ([]model.Answer, error) {
+	answers, err := s.answerRepo.FilterByQuestionGroup(groupId)
 	if err != nil {
 		return nil, err
 	}

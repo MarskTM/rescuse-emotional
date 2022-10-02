@@ -120,14 +120,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/answer/filter/{question_id}": {
+        "/answer/filter/{group_id}": {
             "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "input: amswer's question_id =\u003e output:  amswers",
+                "description": "input: amswer's question group_id =\u003e output:  amswers list",
                 "consumes": [
                     "application/json"
                 ],
@@ -142,7 +142,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "question_id",
-                        "name": "question_id",
+                        "name": "group_id",
                         "in": "path",
                         "required": true
                     }
@@ -1393,7 +1393,7 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "question_id": {
+                "question_group": {
                     "type": "integer"
                 },
                 "score_anxiety": {

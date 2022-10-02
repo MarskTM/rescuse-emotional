@@ -41,29 +41,45 @@ func (s *judgeService) GetAdvices(stress, depess, anxiety int) (*model.AdvicePay
 	if err != nil {
 		return nil, err
 	}
-
 	var adviceStress, adviceDepress, adviceAnxiety string
-	for _, i := range judges {
-		if i.ScoreStressMin <= stress && stress <= i.ScoreStressMax {
-			adviceStress = i.AdviceStress
+
+	// Use for questions group 2 - test depession
+	if stress == 0 && anxiety == 0 {
+		for _, i := range judges {
+			if i.ScoreDepressMin <= depess && depess <= i.ScoreDepressMax {
+				adviceDepress = i.AdviceDepress
+			}
 		}
-		if i.ScoreDepressMin <= depess && depess <= i.ScoreDepressMax {
-			adviceDepress = i.AdviceDepress
+		return &model.AdvicePayload{
+			ScoreDepress: depess,
+			AdviceDepress: adviceDepress,
+		},nil
+	} else {
+		// Use for questions group 1 - test stress, depession, anxiety
+		for _, i := range judges {
+			if i.ScoreStressMin <= stress && stress <= i.ScoreStressMax {
+				adviceStress = i.AdviceStress
+			}
+			if i.ScoreDepressMin <= depess && depess <= i.ScoreDepressMax {
+				adviceDepress = i.AdviceDepress
+			}
+			if i.ScoreAnxietyMin <= anxiety && anxiety <= i.ScoreAnxietyMax {
+				adviceAnxiety = i.AdviceAnxiety
+			}
 		}
-		if i.ScoreAnxietyMin <= anxiety && anxiety <= i.ScoreAnxietyMax {
-			adviceAnxiety = i.AdviceAnxiety
-		}
+
+		return &model.AdvicePayload{
+			ScoreStress:  stress,
+			ScoreDepress: depess,
+			ScoreAnxiety: anxiety,
+	
+			AdviceStress:  adviceStress,
+			AdviceDepress: adviceDepress,
+			AdviceAnxiety: adviceAnxiety,
+		}, nil
 	}
 
-	return &model.AdvicePayload{
-		ScoreStress:  stress,
-		ScoreDepress: depess,
-		ScoreAnxiety: anxiety,
 
-		AdviceStress:  adviceStress,
-		AdviceDepress: adviceDepress,
-		AdviceAnxiety: adviceAnxiety,
-	}, nil
 
 }
 

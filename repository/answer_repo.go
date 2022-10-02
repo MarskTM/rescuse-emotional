@@ -58,11 +58,11 @@ func (r *answerRepository) Delete(id int) (error) {
 	return nil
 }
 
-func (r *answerRepository) FilterByQuestionId(questionId int) ([]model.Answer, error) {
+func (r *answerRepository) FilterByQuestionGroup(groupId int) ([]model.Answer, error) {
 	db := infrastructure.GetDB()
 	var answers []model.Answer
 
-	if err := db.Where("question_id = ?", questionId).Find(&answers).Error; err != nil {
+	if err := db.Where("question_group = ?", groupId).Find(&answers).Error; err != nil {
 		return nil, err
 	}
 	return answers, nil
