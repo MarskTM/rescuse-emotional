@@ -8,7 +8,7 @@ import (
 
 type User struct {
 	Id                 int        `json:"id" gorm:"primaryKey"`
-	Username           string     `json:"username" gorm:"username"`
+	Username           string     `json:"username" gorm:"column:username;unique"`
 	Password           string     `json:"password" gorm:"password"`
 	Role               string     `json:"role" gorm:"role"`
 	Profile            *Profile   `json:"profile" gorm:"foreignKey:UserId;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`

@@ -59,7 +59,7 @@ func (r *userRepository) UpdateUser(newUser model.User) (*model.User, error) {
 func (r *userRepository) DeleteUser(id int) (*model.User, error) {
 	db := infrastructure.GetDB()
 
-	if err := db.Model(&model.User{Id: id}).Update("deletedAt", time.Now()).Error; err != nil {
+	if err := db.Model(&model.User{Id: id}).Update("deleted_at", time.Now()).Error; err != nil {
 		return nil, err
 	}
 

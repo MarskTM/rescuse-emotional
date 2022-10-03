@@ -3,7 +3,7 @@ package repository
 import (
 	"rescues/infrastructure"
 	"rescues/model"
-
+	"time"
 	"gorm.io/gorm/clause"
 )
 
@@ -61,8 +61,7 @@ func (r *profileRepository) Update(id int, profile model.Profile) (*model.Profil
 func (r *profileRepository) Delete(id int) error {
 	db := infrastructure.GetDB()
 
-	var record model.Profile
-	if err := db.Where("id = ?", id).Delete(&record).Error; err != nil {
+	if err := db.Model(&model.Profile{Id: id}).Update("deleted_at", time.Now()).Error; err != nil {
 		return err
 	}
 	return nil
