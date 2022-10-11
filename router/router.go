@@ -47,6 +47,7 @@ func Router() http.Handler {
 	quizzController := controller.NewQuizzController()
 	judgeController := controller.NewJudgeController()
 	answerController := controller.NewAnswerController()
+	notionController := controller.NewNotionController()
 
 	r.Route("/api/v1", func(router chi.Router) {
 		// Public routes
@@ -110,6 +111,13 @@ func Router() http.Handler {
 				subRoute.Put("/update", answerController.Update)
 				subRoute.Delete("/delete/{id}", answerController.Delete)
 				subRoute.Get("/filter/{group_id}", answerController.FilterByQuestionGroup)
+			})
+
+			protectedRoute.Route("/notion", func(subRoute chi.Router) {
+				subRoute.Get("/profile/{profile_id}", notionController.GetByProfileId)
+				subRoute.Post("/create", notionController.Create)
+				subRoute.Put("/update", notionController.Update)
+				subRoute.Delete("/delete/{id}", notionController.Delete)
 			})
 		})
 	})

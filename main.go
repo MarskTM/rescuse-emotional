@@ -19,7 +19,10 @@ import (
 // @name Authorization
 
 func main() {
+	// Go run main.go
 	log.Println("Database name: ", infrastructure.GetDBName())
 	log.Fatal(http.ListenAndServe(":"+infrastructure.GetAppPort(), router.Router()))
 
+	
 }
+

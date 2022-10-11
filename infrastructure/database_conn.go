@@ -48,6 +48,7 @@ func InitDatabase(allowMigrate bool) error {
 			&model.Quizz{},
 			&model.Judge{},
 			&model.Answer{},
+			&model.Notion{},
 		)
 	}
 

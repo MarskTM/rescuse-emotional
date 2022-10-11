@@ -62,6 +62,19 @@ definitions:
       username:
         type: string
     type: object
+  model.Notion:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      profileId:
+        type: integer
+      public:
+        type: boolean
+      title:
+        type: string
+    type: object
   model.Profile:
     properties:
       avatar:
@@ -432,6 +445,100 @@ paths:
       summary: Update judges
       tags:
       - judge-manager-apis
+  /notion/create:
+    post:
+      consumes:
+      - application/json
+      description: 'input: notion''s data => output: notion''s data created'
+      parameters:
+      - description: notion
+        in: body
+        name: notion
+        required: true
+        schema:
+          $ref: '#/definitions/model.Notion'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Create notion
+      tags:
+      - notion-manager-apis
+  /notion/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 'input: notion''s id => output: notion''s data deleted'
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete notion
+      tags:
+      - notion-manager-apis
+  /notion/profile/{profile_id}:
+    get:
+      consumes:
+      - application/json
+      description: 'input: ProfileID => output: notion''s list'
+      parameters:
+      - description: profile_id
+        in: path
+        name: profile_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Get By ProfileId notion
+      tags:
+      - notion-manager-apis
+  /notion/update:
+    put:
+      consumes:
+      - application/json
+      description: 'input: notion''s data => output: notion''s data updated'
+      parameters:
+      - description: notion
+        in: body
+        name: notion
+        required: true
+        schema:
+          $ref: '#/definitions/model.Notion'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      security:
+      - ApiKeyAuth: []
+      summary: Update notion
+      tags:
+      - notion-manager-apis
   /profile/{id}:
     get:
       consumes:
